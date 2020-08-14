@@ -4,7 +4,6 @@ import {SEARCH_QUERY} from '../graphql/queries';
 import '../App.css';
 import Issue from '../components/Issue';
 
-
 function Home() {
   
     const [keyword,setKeyword] = useState("");
@@ -30,8 +29,12 @@ function Home() {
     }
 
     const { loading, error, data ,refetch} = useQuery(SEARCH_QUERY,{variables:{query}});
-  
-  if (loading) return <p>Loading...</p>;
+
+  if (loading) return ( <div className="text-center">
+                      <div className="spinner-border" role="status">
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                      </div>);
   if (error) return <p>error {console.log(error)}</p>;
   return (
     <div className="container">
@@ -39,7 +42,7 @@ function Home() {
           <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="search">Search Issues by keyword</label>
-            <input type="text" className="form-control" id="keyword" name="keyword" onChange={handleChange("keyword")}/>
+            <input type="search" className="form-control" id="keyword" name="keyword" onChange={handleChange("keyword")}/>
           </div>
           </div>
           <div className="form-row">
@@ -57,10 +60,30 @@ function Home() {
           </div>
     </form>
     <button onClick={()=>refetch({query:buildQuery()})} className="btn btn-primary"> Search</button>
+    <div className="row">
+    <div className="col-md-8">
+     <div>Total issues : {data.search.issueCount}</div>
       { 
-        data.search.nodes.map((issue:any)=> <Issue issue={issue} key={issue.id}></Issue>)
+        data.search.nodes.map((issue:any)=> <Issue issue={issue} key={issue.number}></Issue>)
       }
-
+      </div>
+      <div className="col-md-4">
+      <ul className="list-group">
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+          Cras justo odio
+          <span className="badge badge-primary badge-pill">14</span>
+        </li>
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+          Dapibus ac facilisis in
+          <span className="badge badge-primary badge-pill">2</span>
+        </li>
+        <li className="list-group-item d-flex justify-content-between align-items-center">
+          Morbi leo risus
+          <span className="badge badge-primary badge-pill">1</span>
+        </li>
+      </ul>
+      </div>
+      </div>
     </div>
   )
 

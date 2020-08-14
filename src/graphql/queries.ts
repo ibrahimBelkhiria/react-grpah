@@ -26,6 +26,7 @@ query($query:String!) {
         ... on Issue{
           id
           title
+          number
           body
           url
           state
@@ -51,4 +52,36 @@ query($query:String!) {
       
     }
   }
+`
+export const GET_ISSUE_BY_NUMBER = gql`
+query($number:Int!) { 
+  repository(name:"react",owner:"facebook"){
+    createdAt
+    issue(number:$number){
+      title
+      body
+      state
+      url
+      author{
+        avatarUrl
+        login
+      }
+      createdAt
+      comments(first:5){
+        totalCount
+        nodes{
+            url
+            body
+            createdAt
+          	author{
+              login
+              avatarUrl
+              url
+            }
+        }
+      }
+      
+    }
+  }
+}
 `

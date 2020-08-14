@@ -3,6 +3,7 @@ import {BrowserRouter as Router ,Route, Switch,} from 'react-router-dom';
 import Home from '../pages/Home';
 import SingleIssuePage from '../pages/SingleIssuePage';
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
        <Route exact path="/" component={Home}/>
        <Route exact path="/issue/:id" component={SingleIssuePage}/>
        </Switch>
+       <Footer/>
      </Router>
    )
 

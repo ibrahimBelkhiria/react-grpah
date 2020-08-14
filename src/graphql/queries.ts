@@ -1,27 +1,29 @@
 import { gql } from '@apollo/client';
 
-
-export const GET_REACT_REPOSITORY_ISSUES = gql`
+export const GET_REPO_INFO = gql`
 query { 
-  repository(owner:"facebook", name:"react") {
-    issues(last:20, states:CLOSED) {
-      edges {
-        node {
-          title
-          url
-          id
-        }
-      }
+  repository(name:"react",owner:"facebook"){
+    id
+    __typename
+    pullRequests{
+      totalCount
     }
+  stargazers{
+    totalCount
   }
+  forkCount
 }
-`
+}`
+
 
 export const SEARCH_QUERY = gql`
-query($query:String!) { 
-    search(type:ISSUE,query:$query,first:10){
+query($query:String!,$after:String) { 
+    search(type:ISSUE,query:$query,first:10,after:$after){
       __typename
       issueCount
+      pageInfo{
+        endCursor
+      }
       nodes{
         ... on Issue{
           id
@@ -35,17 +37,7 @@ query($query:String!) {
             avatarUrl
               url
           }
-          comments(first:5){
-            totalCount
-            nodes{
-              author{
-                 login
-                  avatarUrl
-                  url
-              }
-              body
-            }
-          }
+          
         }
         __typename
       }
@@ -71,6 +63,7 @@ query($number:Int!) {
         totalCount
         nodes{
             url
+            id
             body
             createdAt
           	author{

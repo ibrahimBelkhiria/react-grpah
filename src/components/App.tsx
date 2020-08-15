@@ -11,11 +11,13 @@ function App() {
    return(
      <Router>
        <Navbar/>
+       <div className="content">
        <Switch>
        <Route exact path="/" component={Home}/>
        <Route exact path="/issue/:id" component={SingleIssuePage}/>
        </Switch>
        <Footer/>
+       </div>
      </Router>
    )
 

@@ -57,7 +57,7 @@ function Home() {
             </div>
             <div className="form-check form-check-inline">
               <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" onChange={handleChange("all")} value="closed"/>
-              <label className="form-check-label" htmlFor="inlineRadio3">All</label>
+              <label className="form-check-label" htmlFor="inlineRadio3">All(default)</label>
             </div>
           </div>
           </div>

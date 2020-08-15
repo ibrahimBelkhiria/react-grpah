@@ -15,7 +15,7 @@ function IssueDetails(props: any) {
             </div>
         </div>
         {issue.comments.nodes.length!==0 ?
-           <div>
+           <div className="box">
             { issue.comments.nodes.map((comment:any) => (
                 <div  key={comment.id} className="comment">
                 <div  className="list-group-item list-group-item-action comment-style">
@@ -27,7 +27,7 @@ function IssueDetails(props: any) {
                 </div>
                 </div>
                 ))}
-            </div>: <h3 className="text-center">No Comments Yet</h3>
+            </div>: <h3 className="text-center no-coment">No Comments Yet</h3>
         
         }
     

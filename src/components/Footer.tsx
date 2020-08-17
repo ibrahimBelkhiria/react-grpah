@@ -1,12 +1,10 @@
 import React from 'react'
 
-interface Props {}
 
-function Footer(props: Props) {
-    const {} = props
+function Footer() {
 
     return (
-        <footer>Crafted with Love &hearts;	</footer>
+        <footer>Crafted with Love <span className="heart">&hearts;</span></footer>
     )
 }
 

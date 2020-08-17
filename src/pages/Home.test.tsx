@@ -1,15 +1,17 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import Home from './Home';
 import { MockedProvider } from '@apollo/client/testing';
 import { SEARCH_QUERY } from '../graphql/queries';
+
+afterEach(cleanup);
 
 const mocks = [
     {
       request: {
         query: SEARCH_QUERY,
         variables: {
-          name: 'Buck',
+          query: 'repo:facebook/react is:issue',
         },
       },
       result: {
@@ -32,18 +34,25 @@ const mocks = [
                     },
                     "__typename": "Issue"
                   }]
-                }
+            }
         },
       },
     },
   ];
   
   
-test('check if home renders correctly', () => {
+test('check if home renders correctly', async () => {
 
 
-  const { getByText } = render( <MockedProvider  mocks={mocks} addTypename={false}> <Home/> </MockedProvider>);
+  const { getByText ,findByText} = render( <MockedProvider  mocks={mocks} addTypename={false}>
+                           <> 
+                           <Home/>
+                           </> 
+                            </MockedProvider>);
+   const SpinnerElement = getByText(/Loading.../i);
+   expect(SpinnerElement).toBeInTheDocument();
 
-//   const linkElement = getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
+    const IssueTitle = await findByText(/Bug: Event Capture does not work in video environment/i);
+    expect(IssueTitle).toBeInTheDocument();
+
 });

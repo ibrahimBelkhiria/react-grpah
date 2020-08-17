@@ -66,3 +66,15 @@ form {
 #keyword{
   border: solid;
 }
+
+.heart{
+  color: red;
+}
+
+
+.issue-body{
+  margin-top: 10px;
+  text-align: justify;
+  background-color: mintcream;
+  padding: inherit;
+}

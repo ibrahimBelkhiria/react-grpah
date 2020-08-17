@@ -40,7 +40,7 @@ function Home(){
       <form onSubmit={(e)=>e.preventDefault()}>
           <div className="form-row">
           <div className="form-group col-md-6">
-           <strong> <label htmlFor="search">Search Issues by keyword</label></strong>
+           <strong> <label htmlFor="search">Search by keyword in issues body or title</label></strong>
             <input type="search" className="form-control" placeholder="type keywords..." id="keyword" name="keyword" onChange={handleChange("keyword")}/>
           </div>
           </div>
@@ -64,12 +64,12 @@ function Home(){
     </form>
     <button onClick={()=>refetch({query:buildQuery()})} className="btn btn-primary"> Apply filters</button>
     <div className="row">
-    <div className="col-md-8">
+    <div className="col-md-8"  data-testid="result">
       <button type="button" className="btn btn-primary total">
           Results <span className="badge badge-light">{data.search.issueCount}</span>
       </button>
       { 
-        data.search.nodes.map((issue:any)=> <Issue issue={issue} key={issue.number}></Issue>)
+       data.search.nodes.map((issue:any)=> <Issue issue={issue} key={issue.number}></Issue>)
       }
       <button className="btn btn-primary load-more-btn"
         onClick={() => {
@@ -94,7 +94,7 @@ function Home(){
       </div>
 
       <div className="col-md-4">
-        <RepoInfo/>
+        {/* <RepoInfo/> */}
       </div>
       </div>
     </div>

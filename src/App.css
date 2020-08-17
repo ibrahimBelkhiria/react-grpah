@@ -63,3 +63,6 @@ form {
 .comment {
   border-bottom:solid black;
 }
+#keyword{
+  border: solid;
+}

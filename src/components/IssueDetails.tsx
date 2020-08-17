@@ -3,7 +3,7 @@ import React from 'react';
 
 function IssueDetails(props: any) {
     const {issue} = props;
-
+    console.log(issue)
     return (
     <div>
         <div className="card card-style">
@@ -11,6 +11,8 @@ function IssueDetails(props: any) {
             <h4 className="card-title">{issue.title}</h4><span className={issue.state==="OPEN"?"badge badge-success":"badge badge-danger"}>{issue.state}</span>
             <div className="card-footer">   
             <a href={issue.url} target="_blank" rel='noopener noreferrer' >View Issue on github</a>
+            <div>Created By<a href={issue.author.url} target="_blank" rel='noopener noreferrer' >{issue.author.login}</a></div>
+
             </div>  
             </div>
         </div>

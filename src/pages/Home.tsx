@@ -6,7 +6,7 @@ import Issue from '../components/Issue';
 import Spinner from '../components/Spinner';
 import RepoInfo from '../components/RepoInfo';
 
-function Home() {
+function Home(){
   
     const [keyword,setKeyword] = useState("");
     const [open,setOpen] = useState("");
@@ -37,7 +37,7 @@ function Home() {
   if (error) return <p>error {console.log(error)}</p>;
   return (
     <div className="container">
-      <form >
+      <form onSubmit={(e)=>e.preventDefault()}>
           <div className="form-row">
           <div className="form-group col-md-6">
            <strong> <label htmlFor="search">Search Issues by keyword</label></strong>
@@ -45,7 +45,7 @@ function Home() {
           </div>
           </div>
           <div className="form-row">
-          <legend className="col-form-label col-sm-2 pt-0">STATUS</legend>
+          <legend className="col-form-label col-sm-2 pt-0"><strong>STATUS</strong></legend>
           <div className="form-group col-md-6">
             <div className="form-check form-check-inline">
               <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" onChange={handleChange("open")} value="open"/>

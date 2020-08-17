@@ -57,6 +57,7 @@ query($number:Int!) {
       author{
         avatarUrl
         login
+        url
       }
       createdAt
       comments(first:5){

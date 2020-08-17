@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-interface Props {}
 
-function Navbar(props: Props) {
-    const {} = props
+function Navbar() {
 
     return (
         <div>

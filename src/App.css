@@ -6,11 +6,11 @@
   right: 34px;
 }
 .content {
-  min-height: 100vh; /* will cover the 100% of viewport */
+  min-height: 100vh;
  overflow: hidden;
  display: block;
  position: relative;
- padding-bottom: 100px; /* height of your footer */
+ padding-bottom: 100px;
 }
 html,
 body {
@@ -71,10 +71,13 @@ form {
   color: red;
 }
 
-
 .issue-body{
   margin-top: 10px;
   text-align: justify;
   background-color: mintcream;
   padding: inherit;
+}
+
+a{
+  text-decoration: none !important;
 }

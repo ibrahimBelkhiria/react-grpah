@@ -22,25 +22,28 @@ function Home(){
       console.log(keyword,open,closed);
     };
 
+    // The default query to execute 
     let query = `repo:facebook/react is:issue`;
-    
+
+    // Building the query dynamically , depends on the filters 
     const buildQuery = () => {
       let OPEN= open?"is:open":"";
       let CLOSED = closed?"is:closed":"";
       let searchText = keyword;
       return `repo:facebook/react ${searchText} in:body,title is:issue ${OPEN} ${CLOSED}`;
     }
-
+    // quering the Data using useQuery hook
     const { loading, error, data ,refetch,fetchMore} = useQuery(SEARCH_QUERY,{variables:{query}});
 
   if (loading) return ( <Spinner/>);
   if (error) return <p>error {console.log(error)}</p>;
+
   return (
     <div className="container">
       <form onSubmit={(e)=>e.preventDefault()}>
           <div className="form-row">
           <div className="form-group col-md-6">
-           <strong> <label htmlFor="search">Search by keyword in issues body or title</label></strong>
+           <strong> <label htmlFor="search" >Search by keyword in issues body or title</label></strong>
             <input type="search" className="form-control" placeholder="type keywords..." id="keyword" name="keyword" onChange={handleChange("keyword")}/>
           </div>
           </div>
@@ -62,7 +65,7 @@ function Home(){
           </div>
           </div>
     </form>
-    <button onClick={()=>refetch({query:buildQuery()})} className="btn btn-primary"> Apply filters</button>
+    <button onClick={()=>refetch({query:buildQuery()})} className="btn btn-primary filter"> Apply filters</button>
     <div className="row">
     <div className="col-md-8"  data-testid="result">
       <button type="button" className="btn btn-primary total">
@@ -78,8 +81,6 @@ function Home(){
           fetchMore({
             variables: { after: endCursor },
             updateQuery: (prevResult:any, { fetchMoreResult }) => {
-              console.log(prevResult);
-              console.log(fetchMoreResult);
               fetchMoreResult.search.nodes = [
                 ...prevResult.search.nodes,
                 ...fetchMoreResult.search.nodes
@@ -94,7 +95,7 @@ function Home(){
       </div>
 
       <div className="col-md-4">
-        {/* <RepoInfo/> */}
+        <RepoInfo/>
       </div>
       </div>
     </div>
